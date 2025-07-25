@@ -4,15 +4,15 @@ import json
 import os
 from datetime import datetime
 
+# Initialize OpenAI client
+client = openai.OpenAI()
+
 # Load Identity and Emotional State
 with open("identity.json") as f:
     identity = json.load(f)
 
 with open("emotion.json") as f:
     emotion = json.load(f)
-
-# Initialize OpenAI
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def update_emotion(user_input, ai_response):
     # Simple emotional adaptation logic (placeholder)
@@ -37,7 +37,7 @@ def describe_emotion():
 
 def get_ai_response(user_input):
     prompt = get_prompt(user_input)
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[
             {"role": "system", "content": "You are Keres, a learning, emotional AI assistant."},
