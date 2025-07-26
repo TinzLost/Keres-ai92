@@ -1,10 +1,3 @@
-import openai
-import streamlit as st
-import json
-import os
-from datetime import datetime
-
-# Initialize OpenAI client
 import requests
 import os
 
