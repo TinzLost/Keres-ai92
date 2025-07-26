@@ -38,7 +38,7 @@ def describe_emotion():
 def get_ai_response(user_input):
     prompt = get_prompt(user_input)
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are Keres, a learning, emotional AI assistant."},
             {"role": "user", "content": prompt}
