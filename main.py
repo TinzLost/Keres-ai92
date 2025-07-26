@@ -32,7 +32,7 @@ def get_ai_response(user_input):
 
     try:
         response = requests.post(
-            "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1",
+            "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta",
             headers=headers,
             json=payload
         )
