@@ -50,11 +50,11 @@ def get_ai_response(user_input):
                 {"role": "user", "content": prompt}
             ]
         )
-        reply = response.choices[0].message.content.strip()
-    except Exception as e:
-        reply = f"⚠️ Error: {str(e)}"
-    update_emotion(user_input, reply)
-    return reply
+        try:
+    reply = get_ai_response(user_input)
+except Exception as e:
+    st.error(f"⚠️ OpenAI error:\n\n{str(e)}")
+    reply = "⚠️ Something went wrong while talking to Keres."
 
 # Streamlit UI
 st.set_page_config(page_title="Keres - Adaptive AI", layout="centered")
