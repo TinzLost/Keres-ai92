@@ -5,13 +5,36 @@ import os
 from datetime import datetime
 
 # Initialize OpenAI client
-import openai
+import requests
 import os
 
-client = openai.OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY"),
-    project="proj_O2GHkC6BO3BbO0FfeVAbj2UH" 
-)
+HF_API_KEY = os.getenv("HF_API_KEY")
+
+def get_ai_response(user_input):
+    headers = {
+        "Authorization": f"Bearer {HF_API_KEY}"
+    }
+    payload = {
+        "inputs": f"User: {user_input}\nAssistant:",
+        "parameters": {
+            "max_new_tokens": 150,
+            "do_sample": True,
+            "temperature": 0.7
+        }
+    }
+    response = requests.post(
+        "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1",
+        headers=headers,
+        json=payload
+    )
+    result = response.json()
+
+    if isinstance(result, dict) and "error" in result:
+        return f"⚠️ HF API Error: {result['error']}"
+
+    text = result[0]["generated_text"]
+    reply = text.split("Assistant:")[-1].strip()
+    return reply
 # Load Identity and Emotional State
 with open("identity.json") as f:
     identity = json.load(f)
