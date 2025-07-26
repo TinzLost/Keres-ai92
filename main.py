@@ -50,11 +50,8 @@ def get_ai_response(user_input):
                 {"role": "user", "content": prompt}
             ]
         )
-        try:
+        
     reply = get_ai_response(user_input)
-except Exception as e:
-    st.error(f"⚠️ OpenAI error:\n\n{str(e)}")
-    reply = "⚠️ Something went wrong while talking to Keres."
 
 # Streamlit UI
 st.set_page_config(page_title="Keres - Adaptive AI", layout="centered")
