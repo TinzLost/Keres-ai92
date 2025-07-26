@@ -5,8 +5,13 @@ import os
 from datetime import datetime
 
 # Initialize OpenAI client
-client = openai.OpenAI()
+import openai
+import os
 
+client = openai.OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+    project="proj_O2GHkC6BO3BbO0FfeVAbj2UH" 
+)
 # Load Identity and Emotional State
 with open("identity.json") as f:
     identity = json.load(f)
